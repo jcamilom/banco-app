@@ -9,9 +9,7 @@ import { Client } from '../client';
 })
 export class RegFormComponent {
 
-  idTypes = ['C.C.', 'Pasaporte'];
-
-  model = new Client(1234, this.idTypes[0], 'Juan', 'Ramirez', 'Zuluaga', '1991-03-21', 'Pablo');
+  model = new Client(1234, 'Juan', 'Ramirez', 'Zuluaga', '1991-03-21', 'Pablo');
 
   submitted = false;
 
