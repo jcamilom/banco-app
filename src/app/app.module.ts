@@ -12,6 +12,7 @@ import { RegFormComponent } from './components/reg-form/reg-form.component';
 
 // Directives
 import { LegalAgeDirective } from './directives/legal-age.directive';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LegalAgeDirective } from './directives/legal-age.directive';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [ClientService],
   bootstrap: [AppComponent]
