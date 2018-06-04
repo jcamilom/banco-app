@@ -26,4 +26,14 @@ export class ClientService {
       );
   }
 
+  //////// Save methods //////////
+
+  /* POST: add a new client to the server */
+  addClient (client: Client): Observable<Client> {
+    return this.http.post<Client>(this.clientsURL, JSON.stringify(client), httpOptions)
+      .pipe(
+        tap(client => console.log(`posted client`))
+      );
+  }
+
 }

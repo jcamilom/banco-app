@@ -5,7 +5,7 @@
       <label for="firstname">Primer nombre</label>
       <input type="text" class="form-control" id="firstname"
               required
-              [(ngModel)]="model.firstname" name="firstname"
+              [(ngModel)]="client.firstname" name="firstname"
               #firstname="ngModel">
     </div>
     <div [hidden]="firstname.valid || firstname.pristine"
@@ -16,14 +16,14 @@
     <div class="form-group">
       <label for="secFirstname">Segundo nombre</label>
       <input type="text" class="form-control" id="secFirstname"
-              [(ngModel)]="model.secFirstname" name="secFirstname">
+              [(ngModel)]="client.secFirstname" name="secFirstname">
     </div>
 
     <div class="form-group">
       <label for="lastname">Primer apellido</label>
       <input type="text" class="form-control" id="lastname"
               required
-              [(ngModel)]="model.lastname" name="lastname"
+              [(ngModel)]="client.lastname" name="lastname"
               #lastname="ngModel">
     </div>
     <div [hidden]="lastname.valid || lastname.pristine"
@@ -35,7 +35,7 @@
       <label for="secLastname">Segundo apellido</label>
       <input type="text" class="form-control" id="secLastname"
               required
-              [(ngModel)]="model.secLastname" name="secLastname"
+              [(ngModel)]="client.secLastname" name="secLastname"
               #secLastname="ngModel">
     </div>
     <div [hidden]="secLastname.valid || secLastname.pristine"
@@ -48,7 +48,7 @@
       <label for="id">Número de identificación</label>
       <input type="number" class="form-control" id="id"
               required
-              [(ngModel)]="model.id" name="id"
+              [(ngModel)]="client.id" name="id"
               #id="ngModel">
       
     </div>
@@ -62,7 +62,7 @@
       <label for="bdate">Fecha de nacimiento</label>
       <input type="date" id="bdate" class="form-control" id="bdate"
               required appLegalAge="18"
-              [(ngModel)]="model.birthdate" name="birthdate"
+              [(ngModel)]="client.birthdate" name="birthdate"
               #birthdate="ngModel">
       </div>
       <div *ngIf="birthdate.invalid && (birthdate.dirty || birthdate.touched)"

@@ -10,7 +10,7 @@ import { ClientService } from '../services/client.service';
 })
 export class RegFormComponent implements OnInit {
 
-  model = new Client(1234, 'Juan', 'Ramirez', 'Zuluaga', '1991-03-21', 'Pablo');
+  client = new Client(1234, 'Juan', 'Ramirez', 'Zuluaga', '1991-03-21', 'Pablo');
 
   submitted = false;
 
@@ -25,8 +25,14 @@ export class RegFormComponent implements OnInit {
       .subscribe(clients => console.log(clients));
   }
 
+  addClient(): void {
+    this.clientService.addClient(this.client)
+      .subscribe(client => console.log(client));
+  }
+
   onSubmit() {
     this.submitted = true;
+    this.addClient();
   }
 
 }
