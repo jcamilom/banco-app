@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Client } from '../client';
-import { ClientService } from '../services/client.service';
+import { Client } from '../../client';
+import { ClientService } from '../../services/client.service';
 
 @Component({
   selector: 'app-reg-form',

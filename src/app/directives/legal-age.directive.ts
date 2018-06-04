@@ -8,14 +8,15 @@ import { ValidatorFn, AbstractControl, NG_VALIDATORS, Validator } from '@angular
 export function legalAgeValidator(legalAge: number): ValidatorFn {
   return (control: AbstractControl): {[key: string]: any} => {
     if ((control.value !== undefined && control.value !== '' && control.value != null)) {
-      var bdate: any = new Date(control.value);
-      var today: any = new Date();
+      // TODO: check for number type of legalAge
+      let bdate: any = new Date(control.value);
+      let today: any = new Date();
       //console.log(bdate);
       //console.log(today);
-      var diffDate: any = new Date(today - bdate);
+      let diffDate: any = new Date(today - bdate);
       //console.log(diffDate);
       // This means legalAge years (prob. 18, time in milliseconds)
-      var legalDate: any = new Date(1970 + Number(legalAge), 0);
+      let legalDate: any = new Date(1970 + Number(legalAge), 0);
       //console.log(legalDate);
       const legal = diffDate >= legalDate;
       return legal ? null : {'legalAge': {value: control.value}};      

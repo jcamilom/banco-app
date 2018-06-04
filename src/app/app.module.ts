@@ -8,10 +8,10 @@ import { ClientService } from './services/client.service';
 
 // Components
 import { AppComponent } from './app.component';
-import { RegFormComponent } from './reg-form/reg-form.component';
+import { RegFormComponent } from './components/reg-form/reg-form.component';
 
 // Directives
-import { LegalAgeDirective } from './legal-age.directive';
+import { LegalAgeDirective } from './directives/legal-age.directive';
 
 @NgModule({
   declarations: [
