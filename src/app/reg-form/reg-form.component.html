@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Formulario de registro</h1>
-  <form #clientForm="ngForm">
+  <form (ngSubmit)="onSubmit()" #clientForm="ngForm">
     <div class="form-group">
       <label for="firstname">Primer nombre</label>
       <input type="text" class="form-control" id="firstname"
@@ -79,7 +79,8 @@
         Fecha de nacimiento es obligatoria
       </div>
 
-    <button type="submit" class="btn btn-success">Enviar</button>
-
+    <button type="submit" class="btn btn-success"
+      [disabled]="!clientForm.form.valid">Enviar</button>
+      
   </form>
 </div>
