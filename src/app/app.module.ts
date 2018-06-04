@@ -1,9 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
+// Services
+import { ClientService } from './services/client.service';
+
+// Components
 import { AppComponent } from './app.component';
 import { RegFormComponent } from './reg-form/reg-form.component';
+
+// Directives
 import { LegalAgeDirective } from './legal-age.directive';
 
 @NgModule({
@@ -14,9 +21,10 @@ import { LegalAgeDirective } from './legal-age.directive';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ClientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

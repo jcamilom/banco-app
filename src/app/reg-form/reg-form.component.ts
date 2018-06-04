@@ -1,18 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Client } from '../client';
+import { ClientService } from '../services/client.service';
 
 @Component({
   selector: 'app-reg-form',
   templateUrl: './reg-form.component.html',
   styleUrls: ['./reg-form.component.css']
 })
-export class RegFormComponent {
+export class RegFormComponent implements OnInit {
 
   model = new Client(1234, 'Juan', 'Ramirez', 'Zuluaga', '1991-03-21', 'Pablo');
 
   submitted = false;
 
-  onSubmit() { this.submitted = true; }
+  constructor(private clientService: ClientService) { }
+
+  ngOnInit() {
+    this.getClients();
+  }
+
+  getClients(): void {
+    this.clientService.getClients()
+      .subscribe(clients => console.log(clients));
+  }
+
+  onSubmit() {
+    this.submitted = true;
+  }
 
 }
