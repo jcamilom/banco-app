@@ -4,11 +4,13 @@ import { FormsModule }   from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { RegFormComponent } from './reg-form/reg-form.component';
+import { LegalAgeDirective } from './legal-age.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegFormComponent
+    RegFormComponent,
+    LegalAgeDirective
   ],
   imports: [
     BrowserModule,
