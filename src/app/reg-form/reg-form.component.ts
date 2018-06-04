@@ -11,13 +11,10 @@ export class RegFormComponent {
 
   idTypes = ['C.C.', 'Pasaporte'];
 
-  model = new Client(1234, this.idTypes[0], 'Juan', 'Ramirez', '22-03-1991');
+  model = new Client(1234, this.idTypes[0], 'Juan', 'Ramirez', '1991-03-21');
 
   submitted = false;
 
   onSubmit() { this.submitted = true; }
-
-  // TODO: Remove this when we're done
-  get diagnostic() { return JSON.stringify(this.model); }
 
 }

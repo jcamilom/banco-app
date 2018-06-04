@@ -1,3 +1,44 @@
-<p>
-  reg-form works!
-</p>
+<div class="container">
+  <h1>Formulario de registro</h1>
+  <form #clientForm="ngForm">
+    <div class="form-group">
+      <label for="firstname">Nombre</label>
+      <input type="text" class="form-control" id="firstname"
+              required
+              [(ngModel)]="model.firstname" name="firstname">
+    </div>
+
+    <div class="form-group">
+      <label for="lastname">Apellido</label>
+      <input type="text" class="form-control" id="lastname"
+              required
+              [(ngModel)]="model.lastname" name="lastname">
+    </div>
+
+    <div class="form-group">
+      <label for="id">Identificación</label>
+      <input type="number" class="form-control" id="id"
+              required
+              [(ngModel)]="model.id" name="id">
+    </div>
+
+    <div class="form-group">
+      <label for="idType">Tipo de Identificación</label>
+      <select class="form-control" id="idType"
+              required
+              [(ngModel)]="model.idType" name="idType">
+        <option *ngFor="let idT of idTypes" [value]="idT">{{idT}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="bdate">Fecha de nacimiento</label>
+      <input type="date" id="bdate" class="form-control" id="bdate"
+              required
+              [(ngModel)]="model.birthdate" name="birthdate">
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+
+  </form>
+</div>
