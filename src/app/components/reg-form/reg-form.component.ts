@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from '../../client';
 import { ClientService } from '../../services/client.service';
 
+const errorMsgId0: string = "El número de identificación ";
+const errorMsgId1: string = " ya se encuentra registrado en nuestra base de datos.";
+
 @Component({
   selector: 'app-reg-form',
   templateUrl: './reg-form.component.html',
@@ -58,9 +61,8 @@ export class RegFormComponent implements OnInit {
         if(exist == true) {
           console.log("client already exist");
           // Show error message
+          this.errorMessage = errorMsgId0 + this.client.id + errorMsgId1;
           this.submitError = true;
-          this.errorMessage = "El número de identificación " + this.client.id + 
-                              " ya se encuentra registrado en nuestra base de datos.";
         } else {
           // clear error message if present
           this.clearSubmitError();

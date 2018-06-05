@@ -10,6 +10,11 @@ import { Loan } from '../../loan';
 
 const justNumbRegExp = new RegExp('^[0-9]+$');
 
+const errorMsgId0: string = "No es posible solicitar el crédito. El cliente con número de identificación ";
+const errorMsgId1: string = " no se encuentra registrado en nuestra base de datos.";
+const errorMsgReq: string = "Lo sentimos, usted no cumple con los requisitos "
+                               + "adecuados para solicitar un crédito."
+
 @Component({
   selector: 'app-loan-form',
   templateUrl: './loan-form.component.html',
@@ -21,6 +26,11 @@ export class LoanFormComponent implements OnInit {
   loan = new Loan(4321, 1000);
 
   loanForm: FormGroup;
+
+  submitted = false;
+  submitError = false;
+  approvedAmount: number = 0;
+  errorMessage: string = "";
 
   constructor(
     private clientService: ClientService,
@@ -110,30 +120,46 @@ export class LoanFormComponent implements OnInit {
         // Check if the client gets an approval
         if(this.checkApproval()) {
           // Select range
-          let approvedValue: number = 0;
+          this.approvedAmount = 0;
           let salary = this.loanForm.value.salary;
           if(salary > 800000 && salary < 1000000) {
             console.log("credito de $5'000.000");
-            approvedValue = 5000000;
+            this.approvedAmount = 5000000;
           } else if(salary >= 1000000 && salary < 4000000) {
             console.log("credito de $20'000.000");
-            approvedValue = 20000000;
+            this.approvedAmount = 20000000;
           } else if(salary >= 4000000) {
             console.log("credito de $50'000.000");
-            approvedValue = 50000000;
+            this.approvedAmount = 50000000;
           }
           // Calls the addLoan function
           this.loan.id = this.loanForm.value.id;
-          this.loan.amount = approvedValue;
+          this.loan.amount = this.approvedAmount;
           console.log(this.loan);
           this.addLoan(this.loan);
+          // Show confirmation message
+          this.submitted = true;
         } else {
           console.log("credit not approved");
+          // Show error message
+          this.errorMessage = errorMsgReq;
+          this.submitError = true;
+          this.submitted = true;
         }
       } else {
-        console.log("the clients doesn't exist in the bank's database")
+        console.log("the clients doesn't exist in the bank's database");
+        // Show error message
+        this.errorMessage = errorMsgId0 + this.loanForm.value.id + errorMsgId1;
+        this.submitError = true;
+        this.submitted = true;
       }
     });
+  }
+
+  clearSubmitError() {
+    this.submitted = false;
+    this.submitError = false;
+    this.errorMessage = "";
   }
 
   get id() { return this.loanForm.get('id'); }
