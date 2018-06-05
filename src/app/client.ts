@@ -6,7 +6,11 @@ export class Client {
     public lastname: string,
     public secLastname: string,
     public birthdate: string,
-    public secFirstname?: string
+    public secFirstname?: string,
+    public companyName?: string,
+    public nit?: number,
+    public salary?: number,
+    public entryDate?: string
   ) {  }
 
 }
