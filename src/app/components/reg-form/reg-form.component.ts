@@ -13,6 +13,8 @@ export class RegFormComponent implements OnInit {
   client = new Client(1234, 'Juan', 'Ramirez', 'Zuluaga', '1991-03-21', 'Pablo');
 
   submitted = false;
+  submitError = false;
+  errorMessage: string = "";
 
   constructor(private clientService: ClientService) { }
 
@@ -31,7 +33,6 @@ export class RegFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
     // Add client if not exist
     this.addClientIfNotExist();
   }
@@ -56,10 +57,24 @@ export class RegFormComponent implements OnInit {
         }
         if(exist == true) {
           console.log("client already exist");
+          // Show error message
+          this.submitError = true;
+          this.errorMessage = "El número de identificación " + this.client.id + 
+                              " ya se encuentra registrado en nuestra base de datos.";
         } else {
+          // clear error message if present
+          this.clearSubmitError();
+          // Add the client
           this.addClient();
+          // Show confirmation message
+          this.submitted = true;
         }
       });
+  }
+
+  clearSubmitError() {
+    this.submitError = false;
+    this.errorMessage = "";
   }
 
 }
