@@ -7,8 +7,8 @@ export function maxTodayValidator(): ValidatorFn {
     let selectedDate = new Date(control.value);
     let today = new Date();
     today.setUTCHours(0,0,0,0);
-    console.log(selectedDate);
-    console.log(today);
+    //console.log(selectedDate);
+    //console.log(today);
     const allowed = selectedDate < today;
     return allowed ? null : {'maxToday': {value: control.value}};
   }
