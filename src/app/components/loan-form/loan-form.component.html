@@ -8,6 +8,28 @@
       <p>client value: {{ client | json }}</p> -->
   
       <!-- <div [hidden]="formDir.submitted"> -->
+
+        <div class="form-group">
+          
+          <label for="id">Su número de identificación</label>
+          <input id="id" type="number" class="form-control" 
+                 formControlName="id" required>
+
+          <div *ngIf="id.invalid && (id.dirty || id.touched)"
+               class="alert alert-danger">
+    
+            <div *ngIf="id.errors.required">
+                El número de identificación es obligatorio.
+            </div>
+            <div *ngIf="id.errors.pattern">
+              Sólo números, sin puntos ni comas.
+            </div>
+            <!-- <div *ngIf="id.errors.forbiddenName">
+              Name cannot be Bob.
+            </div> -->
+          </div>
+                 
+        </div>
   
         <div class="form-group">
   

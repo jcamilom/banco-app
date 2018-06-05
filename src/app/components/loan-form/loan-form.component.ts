@@ -6,6 +6,8 @@ import { maxTodayValidator } from '../../directives/max-today.directive';
 const justNumbRegExp = new RegExp('^[0-9]+$');
 
 import { Client} from '../../client';
+import { Loan } from '../../loan';
+
 @Component({
   selector: 'app-loan-form',
   templateUrl: './loan-form.component.html',
@@ -13,7 +15,7 @@ import { Client} from '../../client';
 })
 export class LoanFormComponent implements OnInit {
 
-  client = new Client(0, '', '', '', '', '', 'Servientrega', 12345678, 2000000, '2015-01-15');
+  client = new Client(245623364, '', '', '', '', '', 'Servientrega', 12345678, 2000000, '2015-01-15');
 
   loanForm: FormGroup;
 
@@ -22,6 +24,10 @@ export class LoanFormComponent implements OnInit {
     /* let todate: string = (new Date).toISOString().split("T")[0]; */
 
     this.loanForm = new FormGroup({
+      'id': new FormControl(this.client.id, [
+        Validators.required,
+        Validators.pattern(justNumbRegExp)
+      ]),
       'companyName': new FormControl(this.client.companyName, Validators.required),
       'nit': new FormControl(this.client.nit, [
         Validators.required,
@@ -80,6 +86,8 @@ export class LoanFormComponent implements OnInit {
     let minDate: any = new Date(1971, 6); // 6 gives 1 July, 6 months have passed
     return diffDate >= minDate;    
   }
+
+  get id() { return this.loanForm.get('id'); }
 
   get companyName() { return this.loanForm.get('companyName'); }
 
