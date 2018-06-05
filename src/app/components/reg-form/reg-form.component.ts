@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from '../../client';
 import { ClientService } from '../../services/client.service';
 
+// Constant messages
 const errorMsgId0: string = "El número de identificación ";
 const errorMsgId1: string = " ya se encuentra registrado en nuestra base de datos.";
 
@@ -15,26 +16,22 @@ export class RegFormComponent implements OnInit {
 
   client = new Client(1234, 'Juan', 'Ramirez', 'Zuluaga', '1991-03-21', 'Pablo');
 
+  // Variables to control the messages to be shown
   submitted = false;
   submitError = false;
   errorMessage: string = "";
 
   constructor(private clientService: ClientService) { }
 
-  ngOnInit() {
-    this.getClients();
-  }
+  ngOnInit() { }
 
-  private getClients(): void {
-    this.clientService.getClients()
-      .subscribe(clients => console.log(clients));
-  }
-
+  // Creates a new client in the server database
   private addClient(): void {
     this.clientService.addClient(this.client)
       .subscribe(client => console.log(client));
   }
 
+  // Creates the client if not exist
   onSubmit() {
     // Add client if not exist
     this.addClientIfNotExist();
@@ -74,6 +71,7 @@ export class RegFormComponent implements OnInit {
       });
   }
 
+  // Clears the variables to show messages
   clearSubmitError() {
     this.submitError = false;
     this.errorMessage = "";

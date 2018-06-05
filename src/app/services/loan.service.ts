@@ -12,7 +12,8 @@ const httpOptions = {
 @Injectable()
 export class LoanService {
 
-  private loansURL: string = "https://bancoapp-2b119.firebaseio.com/loans.json";  // URL to web api
+  // URL to web api for loans
+  private loansURL: string = "https://bancoapp-2b119.firebaseio.com/loans.json";
 
   constructor(
     private http: HttpClient

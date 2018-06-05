@@ -10,10 +10,11 @@ import { Loan } from '../../loan';
 
 const justNumbRegExp = new RegExp('^[0-9]+$');
 
+// Constant messages
 const errorMsgId0: string = "No es posible solicitar el crédito. El cliente con número de identificación ";
 const errorMsgId1: string = " no se encuentra registrado en nuestra base de datos.";
 const errorMsgReq: string = "Lo sentimos, usted no cumple con los requisitos "
-                               + "adecuados para solicitar un crédito."
+                              + "adecuados para solicitar un crédito."
 
 @Component({
   selector: 'app-loan-form',
@@ -25,8 +26,10 @@ export class LoanFormComponent implements OnInit {
   client = new Client(245623364, '', '', '', '', '', 'Servientrega', 12345678, 2000000, '2015-01-15');
   loan = new Loan(4321, 1000);
 
+  // For the reactive form
   loanForm: FormGroup;
 
+  // Variables to control the messages to be shown
   submitted = false;
   submitError = false;
   approvedAmount: number = 0;
@@ -38,9 +41,7 @@ export class LoanFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // Generate the maxValue for the date (today)
-    /* let todate: string = (new Date).toISOString().split("T")[0]; */
-
+    // Initialize the form and set validators
     this.loanForm = new FormGroup({
       'id': new FormControl(this.client.id, [
         Validators.required,
@@ -64,11 +65,13 @@ export class LoanFormComponent implements OnInit {
     });
   }
 
+  // Create an new loan in the server database
   addLoan(loan: Loan) {
     this.loanService.addLoan(loan)
       .subscribe(resp => console.log(resp));
   }
 
+  // Check if the client meets the requirements for a loan and creates it
   onSubmit() {
     console.log("submit!");
 
@@ -76,6 +79,7 @@ export class LoanFormComponent implements OnInit {
     this.addLoanIfRegisteredClient();
   }
 
+  // Check it the client meets the WorkingPeriod and Salary requirements
   checkApproval(): boolean {
     // Check working period
     if(!this.passWoringPeriod()) {
@@ -88,6 +92,7 @@ export class LoanFormComponent implements OnInit {
     return true;
   }
 
+  // Validates the WorkingPeriod requirement
   passWoringPeriod(): boolean {
     let eDate: any = new Date(this.loanForm.value.entryDate);
     let today: any = new Date();
@@ -119,24 +124,15 @@ export class LoanFormComponent implements OnInit {
 
         // Check if the client gets an approval
         if(this.checkApproval()) {
+          
           // Select range
-          this.approvedAmount = 0;
-          let salary = this.loanForm.value.salary;
-          if(salary > 800000 && salary < 1000000) {
-            console.log("credito de $5'000.000");
-            this.approvedAmount = 5000000;
-          } else if(salary >= 1000000 && salary < 4000000) {
-            console.log("credito de $20'000.000");
-            this.approvedAmount = 20000000;
-          } else if(salary >= 4000000) {
-            console.log("credito de $50'000.000");
-            this.approvedAmount = 50000000;
-          }
+          this.selectLoanRange();
+          
           // Calls the addLoan function
           this.loan.id = this.loanForm.value.id;
           this.loan.amount = this.approvedAmount;
-          console.log(this.loan);
           this.addLoan(this.loan);
+          
           // Show confirmation message
           this.submitted = true;
         } else {
@@ -156,6 +152,23 @@ export class LoanFormComponent implements OnInit {
     });
   }
 
+  // Select the loan amount based on the current salary
+  selectLoanRange(): void {
+    this.approvedAmount = 0;
+    let salary = this.loanForm.value.salary;
+    if(salary > 800000 && salary < 1000000) {
+      console.log("credito de $5'000.000");
+      this.approvedAmount = 5000000;
+    } else if(salary >= 1000000 && salary < 4000000) {
+      console.log("credito de $20'000.000");
+      this.approvedAmount = 20000000;
+    } else if(salary >= 4000000) {
+      console.log("credito de $50'000.000");
+      this.approvedAmount = 50000000;
+    }
+  }
+
+  // Clears the variables to show messages
   clearSubmitError() {
     this.submitted = false;
     this.submitError = false;

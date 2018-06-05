@@ -1,6 +1,9 @@
 import { Directive } from '@angular/core';
 import { Validator, ValidatorFn, AbstractControl } from '@angular/forms';
 
+/** This function evaluates if the input date for which the directive
+ * is applied is 'bigger' than the current date.
+ */
 export function maxTodayValidator(): ValidatorFn {
   return (control: AbstractControl): {[key: string]: any} => {
     // TODO: take into account time zone
