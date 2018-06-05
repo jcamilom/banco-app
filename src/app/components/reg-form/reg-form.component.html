@@ -1,119 +1,127 @@
 <div class="container">
 
-  <div [hidden]="submitted">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
 
-    <h1>Formulario de registro</h1>
+    <div [hidden]="submitted">
 
-    <form (ngSubmit)="onSubmit()" #clientForm="ngForm">
-      <div class="form-group">
-        <label for="firstname">Primer nombre</label>
-        <input type="text" class="form-control" id="firstname"
-                required
-                [(ngModel)]="client.firstname" name="firstname"
-                #firstname="ngModel">
-      </div>
-      <div [hidden]="firstname.valid || firstname.pristine"
-        class="alert alert-danger">
-        Primer nombre es obligatorio
-      </div>
-  
-      <div class="form-group">
-        <label for="secFirstname">Segundo nombre</label>
-        <input type="text" class="form-control" id="secFirstname"
-                [(ngModel)]="client.secFirstname" name="secFirstname">
-      </div>
-  
-      <div class="form-group">
-        <label for="lastname">Primer apellido</label>
-        <input type="text" class="form-control" id="lastname"
-                required
-                [(ngModel)]="client.lastname" name="lastname"
-                #lastname="ngModel">
-      </div>
-      <div [hidden]="lastname.valid || lastname.pristine"
-        class="alert alert-danger">
-        Primer apellido es obligatorio
-      </div>
-      
-      <div class="form-group">
-        <label for="secLastname">Segundo apellido</label>
-        <input type="text" class="form-control" id="secLastname"
-                required
-                [(ngModel)]="client.secLastname" name="secLastname"
-                #secLastname="ngModel">
-      </div>
-      <div [hidden]="secLastname.valid || secLastname.pristine"
-        class="alert alert-danger">
-        Segundo apellido es obligatorio
-      </div>
-  
-      <div class="form-group">
-        <!-- TODO: remove this: check if number and set the correct alert<br> -->
-        <label for="id">Número de identificación</label>
-        <input type="number" class="form-control" id="id"
-                required
-                [(ngModel)]="client.id" name="id"
-                #id="ngModel">  
-      </div>
-      <div [hidden]="id.valid || id.pristine"
-        class="alert alert-danger">
-        Número de identificación es obligatorio
-      </div>
-  
-      <div class="form-group">
-        <!-- TODO: remove this: add time zone sensitivity<br> -->
-        <label for="bdate">Fecha de nacimiento</label>
-        <input type="date" class="form-control" id="bdate"
-                required appLegalAge="18"
-                [(ngModel)]="client.birthdate" name="birthdate"
-                #birthdate="ngModel">
-        </div>
-        <div *ngIf="birthdate.invalid && (birthdate.dirty || birthdate.touched)"
+        <h1>Formulario de registro</h1>
+    
+        <form (ngSubmit)="onSubmit()" #clientForm="ngForm">
+          <div class="form-group">
+            <label for="firstname">Primer nombre</label>
+            <input type="text" class="form-control" id="firstname"
+                    required
+                    [(ngModel)]="client.firstname" name="firstname"
+                    #firstname="ngModel">
+          </div>
+          <div [hidden]="firstname.valid || firstname.pristine"
             class="alert alert-danger">
-          <div *ngIf="birthdate.errors.required">
-            Fecha de nacimiento es obligatoria
+            Primer nombre es obligatorio
           </div>
-          <div *ngIf="birthdate.errors.legalAge">
-            Debe ser mayor de edad para registrarse en nuestro banco
+      
+          <div class="form-group">
+            <label for="secFirstname">Segundo nombre</label>
+            <input type="text" class="form-control" id="secFirstname"
+                    [(ngModel)]="client.secFirstname" name="secFirstname">
           </div>
-        </div>
-
-      <div *ngIf="submitError" class="alert alert-danger">
-        {{errorMessage}}
+      
+          <div class="form-group">
+            <label for="lastname">Primer apellido</label>
+            <input type="text" class="form-control" id="lastname"
+                    required
+                    [(ngModel)]="client.lastname" name="lastname"
+                    #lastname="ngModel">
+          </div>
+          <div [hidden]="lastname.valid || lastname.pristine"
+            class="alert alert-danger">
+            Primer apellido es obligatorio
+          </div>
+          
+          <div class="form-group">
+            <label for="secLastname">Segundo apellido</label>
+            <input type="text" class="form-control" id="secLastname"
+                    required
+                    [(ngModel)]="client.secLastname" name="secLastname"
+                    #secLastname="ngModel">
+          </div>
+          <div [hidden]="secLastname.valid || secLastname.pristine"
+            class="alert alert-danger">
+            Segundo apellido es obligatorio
+          </div>
+      
+          <div class="form-group">
+            <!-- TODO: remove this: check if number and set the correct alert<br> -->
+            <label for="id">Número de identificación</label>
+            <input type="number" class="form-control" id="id"
+                    required
+                    [(ngModel)]="client.id" name="id"
+                    #id="ngModel">  
+          </div>
+          <div [hidden]="id.valid || id.pristine"
+            class="alert alert-danger">
+            Número de identificación es obligatorio
+          </div>
+      
+          <div class="form-group">
+            <!-- TODO: remove this: add time zone sensitivity<br> -->
+            <label for="bdate">Fecha de nacimiento</label>
+            <input type="date" class="form-control" id="bdate"
+                    required appLegalAge="18"
+                    [(ngModel)]="client.birthdate" name="birthdate"
+                    #birthdate="ngModel">
+            </div>
+            <div *ngIf="birthdate.invalid && (birthdate.dirty || birthdate.touched)"
+                class="alert alert-danger">
+              <div *ngIf="birthdate.errors.required">
+                Fecha de nacimiento es obligatoria
+              </div>
+              <div *ngIf="birthdate.errors.legalAge">
+                Debe ser mayor de edad para registrarse en nuestro banco
+              </div>
+            </div>
+    
+          <div *ngIf="submitError" class="alert alert-danger">
+            {{errorMessage}}
+          </div>
+      
+          <button type="submit" class="btn btn-success"
+            [disabled]="!clientForm.form.valid">Enviar</button>
+          <button type="button" class="btn btn-default"
+            (click)="clientForm.reset(); clearSubmitError()">Limpiar</button>
+            
+        </form>
+    
       </div>
-  
-      <button type="submit" class="btn btn-success"
-        [disabled]="!clientForm.form.valid">Enviar</button>
-      <button type="button" class="btn btn-default"
-        (click)="clientForm.reset(); clearSubmitError()">Limpiar</button>
-        
-    </form>
+    
+      <div [hidden]="!submitted">
+        <h2>Resultado de la solicitud</h2>
+        <div class="alert alert-success">
+            Usted se ha registrado satisfactoriamente.
+        </div>
+        <div class="row">
+          <div class="col-xs-4"><strong>Nombres:</strong></div>
+          <div class="col-xs-8  pull-left">{{client.firstname}} {{client.secFirstname}}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4"><strong>Apellidos:</strong></div>
+          <div class="col-xs-8 pull-left">{{client.lastname}} {{client.secLastname}}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4"><strong>Identificación:</strong></div>
+          <div class="col-xs-8 pull-left">{{client.id}}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4"><strong>Fecha de nacimiento:</strong></div>
+          <div class="col-xs-8 pull-left">{{client.birthdate}}</div>
+        </div>    
+        <br>
+        <button class="btn btn-success" (click)="submitted=false">Volver</button>
+      </div>
 
+    </div>
   </div>
 
-  <div [hidden]="!submitted">
-    <h2>Resultado de la solicitud</h2>
-    <div class="alert alert-success">
-        Usted se ha registrado satisfactoriamente.
-    </div>
-    <div class="row">
-      <div class="col-xs-3">Nombres</div>
-      <div class="col-xs-9  pull-left">{{client.firstname}} {{client.secFirstname}}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3">Apellidos</div>
-      <div class="col-xs-9 pull-left">{{client.lastname}} {{client.secLastname}}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3">Identificación</div>
-      <div class="col-xs-9 pull-left">{{client.id}}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3">Fecha de nacimiento</div>
-      <div class="col-xs-9 pull-left">{{client.birthdate}}</div>
-    </div>    
-    <br>
-    <button class="btn btn-success" (click)="submitted=false">Volver</button>
-  </div>
+
 
 </div>

@@ -1,10 +1,11 @@
-<div style="text-align:center">
-  <h1>
-    Bienvenido a {{ title }}
-  </h1>
+<div class="top-bar">
+  <nav>
+    <a routerLink="/">
+      <img alt="Brand" src="../assets/brand-dollar-sign.png">
+    </a>
+    <a routerLink="/loan" class="btn btn-default">Solicitar crédito</a>
+    <a routerLink="/registration" class="btn btn-default">Registrarse</a>
+  </nav>
 </div>
-<nav>
-  <a routerLink="/loan" class="btn btn-default">Solicitar crédito</a>
-  <a routerLink="/registration" class="btn btn-default">Registrarse</a>
-</nav>
+
 <router-outlet></router-outlet>

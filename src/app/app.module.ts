@@ -17,6 +17,7 @@ import { LegalAgeDirective } from './directives/legal-age.directive';
 import { MaxTodayDirective } from './directives/max-today.directive';
 
 import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AppRoutingModule } from './app-routing.module';
     RegFormComponent,
     LegalAgeDirective,
     LoanFormComponent,
-    MaxTodayDirective
+    MaxTodayDirective,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
