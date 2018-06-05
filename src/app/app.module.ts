@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Services
 import { ClientService } from './services/client.service';
+import { LoanService } from './services/loan.service';
 
 // Components
 import { AppComponent } from './app.component';
@@ -32,7 +33,10 @@ import { AppRoutingModule } from './app-routing.module';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ClientService],
+  providers: [
+    ClientService,
+    LoanService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
