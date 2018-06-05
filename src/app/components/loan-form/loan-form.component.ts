@@ -1,6 +1,8 @@
 import { Component, OnInit }                  from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+const justNumbRegExp = new RegExp('^[0-9]+$');
+
 import { Client} from '../../client';
 @Component({
   selector: 'app-loan-form',
@@ -14,14 +16,20 @@ export class LoanFormComponent implements OnInit {
   loanForm: FormGroup;
 
   ngOnInit(): void {
+    // Generate the maxValue for the date (today)
+    let todate: string = (new Date).toISOString().split("T")[0];
+
     this.loanForm = new FormGroup({
-      'companyName': new FormControl(this.client.companyName, [
+      'companyName': new FormControl(this.client.companyName, Validators.required),
+      'nit': new FormControl(this.client.nit, [
         Validators.required,
-        /* Validators.minLength(4) */
+        Validators.pattern(justNumbRegExp)
       ]),
-      'nit': new FormControl(this.client.nit, Validators.required),
       'salary': new FormControl(this.client.salary, [
-        Validators.required
+        Validators.required,
+        Validators.min(1),
+        Validators.max(99999999),
+        Validators.pattern(justNumbRegExp)
       ]),
       'entryDate': new FormControl(this.client.entryDate, [
         Validators.required

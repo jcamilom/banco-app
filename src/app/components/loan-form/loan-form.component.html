@@ -3,6 +3,8 @@
     <h1>Formulario de solicitud de crédito</h1>
   
     <form [formGroup]="loanForm" #formDir="ngForm">
+
+        <p>Form value: {{ loanForm.value | json }}</p>
   
       <div [hidden]="formDir.submitted">
   
@@ -31,7 +33,7 @@
   
           <label for="nit">NIT</label>
           <input type="number" id="nit" class="form-control"
-                 formControlName="nit" required>
+                 formControlName="nit" required>                
   
           <div *ngIf="nit.invalid && (nit.dirty || nit.touched)"
                class="alert alert-danger">
@@ -39,10 +41,10 @@
             <div *ngIf="nit.errors.required">
               El número de identificación tributara es obligatorio.
             </div>
-            <!-- <div *ngIf="nit.errors.minlength">
-              Name must be at least 4 characters long.
+            <div *ngIf="nit.errors.pattern">
+              El NIT debe estar compuesto sólo por dígitos, sin puntos ni comas.
             </div>
-            <div *ngIf="nit.errors.forbiddenName">
+            <!-- <div *ngIf="nit.errors.forbiddenName">
               Name cannot be Bob.
             </div> -->
           </div>
@@ -54,16 +56,24 @@
           <input type="number" id="salary" class="form-control"
               formControlName="salary" required>
 
-          <div *ngIf="nit.invalid && (nit.dirty || nit.touched)"
+            <p>Input status: {{ salary.errors | json }}</p>
+
+          <div *ngIf="salary.invalid && (salary.dirty || salary.touched)"
               class="alert alert-danger">
  
-           <div *ngIf="nit.errors.required">
+           <div *ngIf="salary.errors.required">
               El salario actual es obligatorio.
            </div>
-           <!-- <div *ngIf="nit.errors.minlength">
-             Name must be at least 4 characters long.
-           </div> -->
-           <!-- <div *ngIf="nit.errors.forbiddenName">
+           <div *ngIf="salary.errors.min">
+             Debe ser un número positivo.
+           </div>
+           <div *ngIf="salary.errors.max">
+              El salario debe ser menor a $100'000.000.
+            </div>
+            <div *ngIf="salary.errors.pattern">
+              El salario debe ser un número entero, sin puntos ni comas.
+            </div>
+           <!-- <div *ngIf="salary.errors.forbiddenName">
              Name cannot be Bob.
            </div> -->
          </div>
@@ -72,26 +82,26 @@
 
         <div class="form-group">
   
-            <label for="entryDate">Nombre de la empresa</label>
-            <input type="date" id="entryDate" class="form-control"
-                   formControlName="entryDate" required>
-    
-            <div *ngIf="entryDate.invalid && (entryDate.dirty || entryDate.touched)"
-                 class="alert alert-danger">
-    
-              <div *ngIf="entryDate.errors.required">
-                La fecha de ingreso a la empresa es obligatoria.
-              </div>
-              <!-- <div *ngIf="entryDate.errors.minlength">
-                Name must be at least 4 characters long.
-              </div> -->
-              <!-- <div *ngIf="entryDate.errors.forbiddenName">
-                Name cannot be Bob.
-              </div> -->
-            </div>
-          </div>
+          <label for="entryDate">Fecha de ingreso a la empresa</label>
+          <input type="date" id="entryDate" class="form-control"
+                  formControlName="entryDate" max="2017-04-30" required>
   
-        <button type="submit" class="btn btn-default"
+          <div *ngIf="entryDate.invalid && (entryDate.dirty || entryDate.touched)"
+                class="alert alert-danger">
+  
+            <div *ngIf="entryDate.errors.required">
+              La fecha de ingreso a la empresa es obligatoria.
+            </div>
+            <!-- <div *ngIf="entryDate.errors.minlength">
+              Name must be at least 4 characters long.
+            </div> -->
+            <!-- <div *ngIf="entryDate.errors.forbiddenName">
+              Name cannot be Bob.
+            </div> -->
+          </div>
+        </div>
+  
+        <button type="submit" class="btn btn-success"
                [disabled]="loanForm.invalid">Solicitar crédito</button>
         <button type="button" class="btn btn-default"
                (click)="formDir.resetForm({})">Reset</button>
