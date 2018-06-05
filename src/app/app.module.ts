@@ -13,6 +13,7 @@ import { LoanFormComponent } from './components/loan-form/loan-form.component';
 
 // Directives
 import { LegalAgeDirective } from './directives/legal-age.directive';
+import { MaxTodayDirective } from './directives/max-today.directive';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -21,7 +22,8 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent,
     RegFormComponent,
     LegalAgeDirective,
-    LoanFormComponent
+    LoanFormComponent,
+    MaxTodayDirective
   ],
   imports: [
     BrowserModule,

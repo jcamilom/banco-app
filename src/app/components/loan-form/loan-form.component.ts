@@ -1,6 +1,8 @@
 import { Component, OnInit }                  from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { maxTodayValidator } from '../../directives/max-today.directive';
+
 const justNumbRegExp = new RegExp('^[0-9]+$');
 
 import { Client} from '../../client';
@@ -32,7 +34,8 @@ export class LoanFormComponent implements OnInit {
         Validators.pattern(justNumbRegExp)
       ]),
       'entryDate': new FormControl(this.client.entryDate, [
-        Validators.required
+        Validators.required,
+        maxTodayValidator()
       ])
     });
   }

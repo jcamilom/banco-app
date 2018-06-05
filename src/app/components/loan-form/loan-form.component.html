@@ -84,7 +84,7 @@
   
           <label for="entryDate">Fecha de ingreso a la empresa</label>
           <input type="date" id="entryDate" class="form-control"
-                  formControlName="entryDate" max="2017-04-30" required>
+                  formControlName="entryDate" required>
   
           <div *ngIf="entryDate.invalid && (entryDate.dirty || entryDate.touched)"
                 class="alert alert-danger">
@@ -92,9 +92,9 @@
             <div *ngIf="entryDate.errors.required">
               La fecha de ingreso a la empresa es obligatoria.
             </div>
-            <!-- <div *ngIf="entryDate.errors.minlength">
-              Name must be at least 4 characters long.
-            </div> -->
+            <div *ngIf="entryDate.errors.maxToday">
+              La fecha ingresada super la fecha acutal.
+            </div>
             <!-- <div *ngIf="entryDate.errors.forbiddenName">
               Name cannot be Bob.
             </div> -->
